@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snack La Cage</title>
+</head>
+<body>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#D32F2F;
+  --yellow:#F5C800;
+  --yellow-dark:#E0B400;
+  --black:#1A1A1A;
+  --offblack:#222;
+  --white:#fff;
+}
+body{background:var(--yellow);font-family:'Nunito',sans-serif;color:var(--black);}
+.bubble{font-family:'Fredoka One',sans-serif;letter-spacing:1px;}
+
+nav{
+  background:var(--black);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 2rem;height:64px;
+  border-bottom:3px solid var(--yellow);
+  position:sticky;top:0;z-index:100;
+}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-img{height:44px;width:auto;}
+nav ul{display:flex;gap:1.8rem;list-style:none;}
+nav ul a{color:#ccc;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.5px;font-family:'Nunito',sans-serif;}
+nav ul a:hover{color:var(--yellow);}
+.nav-order{background:var(--red);color:#fff;border:none;cursor:pointer;padding:9px 22px;font-size:13px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;}
+
+.hero{
+  background:var(--yellow);
+  padding:3.5rem 2rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;
+}
+.hero-left{flex:1;max-width:55%;}
+.hero-badge{
+  display:inline-block;background:var(--black);color:var(--yellow);
+  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 14px;border-radius:50px;margin-bottom:1.2rem;
+}
+.hero h1{font-family:'Fredoka One',sans-serif;font-size:72px;line-height:0.95;color:var(--black);}
+.hero h1 .red{color:var(--red);}
+.hero-sub{color:var(--black);font-size:15px;margin:1rem 0 1.8rem;line-height:1.6;font-weight:700;opacity:0.75;max-width:380px;}
+.hero-btns{display:flex;gap:12px;align-items:center;}
+.btn-red{background:var(--red);color:#fff;border:none;cursor:pointer;padding:14px 28px;font-size:14px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;}
+.btn-black{background:var(--black);color:var(--yellow);border:none;cursor:pointer;padding:14px 28px;font-size:14px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;}
+
+.hero-right{flex:0 0 auto;display:flex;align-items:center;justify-content:center;}
+.hero-logo-big{width:220px;height:auto;filter:drop-shadow(0 4px 0 rgba(0,0,0,0.15));}
+
+.hero-stats{
+  display:flex;gap:0;
+  background:var(--black);
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:2rem;
+}
+.stat-block{
+  flex:1;padding:16px 20px;text-align:center;
+  border-right:1px solid #333;
+}
+.stat-block:last-child{border-right:none;}
+.stat-num{font-family:'Fredoka One',sans-serif;font-size:30px;color:var(--yellow);line-height:1;}
+.stat-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-top:2px;}
+
+.ticker{background:var(--red);padding:10px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-block;animation:tick 18s linear infinite;font-family:'Fredoka One',sans-serif;font-size:15px;letter-spacing:3px;color:#fff;}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+section{padding:3.5rem 2rem;}
+
+.section-tag{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.section-title{font-family:'Fredoka One',sans-serif;font-size:44px;color:var(--black);line-height:1;margin-bottom:0.5rem;}
+.section-sub{color:var(--black);opacity:0.65;font-size:14px;font-weight:700;line-height:1.6;max-width:400px;margin-bottom:2rem;}
+
+.menu-section{background:var(--white);}
+.badges-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
+.badge{padding:8px 18px;font-size:12px;font-weight:800;letter-spacing:0.5px;cursor:pointer;border-radius:50px;font-family:'Nunito',sans-serif;border:none;}
+.badge.active{background:var(--red);color:#fff;}
+.badge.inactive{background:#f0f0f0;color:#888;}
+.badge.inactive:hover{background:var(--yellow);color:var(--black);}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+.menu-card{
+  background:var(--yellow);border-radius:16px;padding:1.2rem;
+  position:relative;border:2px solid transparent;transition:border-color 0.2s;
+}
+.menu-card:hover{border-color:var(--red);}
+.menu-card-cat{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:4px;}
+.menu-card-name{font-family:'Fredoka One',sans-serif;font-size:17px;color:var(--black);margin-bottom:4px;line-height:1.2;}
+.menu-card-desc{font-size:12px;color:var(--black);opacity:0.6;font-weight:700;margin-bottom:10px;line-height:1.4;}
+.menu-card-price{font-family:'Fredoka One',sans-serif;font-size:24px;color:var(--red);}
+.pop-badge{position:absolute;top:-8px;right:12px;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:50px;font-family:'Nunito',sans-serif;}
+
+.about-section{background:var(--yellow);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.about-card{background:var(--black);border-radius:16px;padding:1.5rem;text-align:center;}
+.about-card-icon{font-size:24px;margin-bottom:6px;}
+.about-card-num{font-family:'Fredoka One',sans-serif;font-size:34px;color:var(--yellow);line-height:1;}
+.about-card-lbl{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-top:4px;}
+.about-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem;}
+.about-pill{background:var(--black);color:var(--yellow);font-size:12px;font-weight:800;padding:6px 14px;border-radius:50px;}
+
+.reviews-section{background:var(--black);}
+.reviews-section .section-title{color:var(--yellow);}
+.reviews-section .section-tag{color:var(--red);}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.review-card{background:#2a2a2a;border-radius:16px;padding:1.4rem;}
+.stars{color:var(--yellow);font-size:14px;letter-spacing:2px;margin-bottom:8px;}
+.review-text{font-size:13px;color:#ccc;line-height:1.7;margin-bottom:10px;font-style:italic;font-weight:700;}
+.review-author{font-size:11px;font-weight:800;color:#666;text-transform:uppercase;letter-spacing:1px;}
+
+.info-section{background:var(--white);display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:4px solid var(--red);}
+.info-block{padding:2.5rem 2rem;border-right:1px solid #eee;}
+.info-block:last-child{border-right:none;}
+.info-title{font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--red);margin-bottom:1rem;}
+.info-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;font-weight:700;}
+.info-day{color:#888;}
+.info-time{color:var(--black);}
+.info-line{font-size:13px;font-weight:700;color:#666;line-height:1.9;}
+.info-line a{color:var(--red);text-decoration:none;}
+.btn-red-full{display:block;width:100%;background:var(--red);color:#fff;border:none;cursor:pointer;padding:12px;font-size:13px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;margin-bottom:8px;text-align:center;}
+.btn-yellow-full{display:block;width:100%;background:var(--yellow);color:var(--black);border:none;cursor:pointer;padding:12px;font-size:13px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;text-align:center;}
+
+.order-banner{background:var(--red);padding:3rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;}
+.ob-h2{font-family:'Fredoka One',sans-serif;font-size:44px;color:#fff;line-height:1;}
+.ob-sub{color:rgba(255,255,255,0.75);font-size:13px;font-weight:700;margin-top:6px;}
+.ob-btns{display:flex;gap:12px;flex-shrink:0;}
+.btn-white{background:#fff;color:var(--red);border:none;cursor:pointer;padding:14px 28px;font-size:13px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.5);cursor:pointer;padding:14px 28px;font-size:13px;font-weight:800;border-radius:50px;font-family:'Nunito',sans-serif;}
+
+footer{background:var(--black);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;border-top:3px solid var(--yellow);}
+.footer-logo{display:flex;align-items:center;gap:8px;}
+.footer-logo img{height:36px;}
+.footer-copy{font-size:11px;color:#555;font-weight:700;}
+.footer-halal{font-size:11px;font-weight:800;color:var(--yellow);background:#2a2a2a;padding:5px 14px;border-radius:50px;}
+
+.lang-toggle{display:flex;background:#2a2a2a;border-radius:50px;overflow:hidden;}
+.lang-btn{padding:5px 14px;font-size:11px;font-weight:800;letter-spacing:1px;cursor:pointer;border:none;font-family:'Nunito',sans-serif;}
+.lang-btn.active{background:var(--yellow);color:var(--black);}
+.lang-btn.inactive{background:transparent;color:#888;}
+</style>
+
+<nav>
+  <div class="logo-wrap">
+    <img src="https://static.takeaway.com/images/restaurants/be/NN3015Q/logo_465x320.png" class="logo-img" alt="La Cage">
+  </div>
+  <ul>
+    <li><a href="#" onclick="document.getElementById('menu-sec').scrollIntoView({behavior:'smooth'});return false;">Menu</a></li>
+    <li><a href="#" onclick="document.getElementById('about-sec').scrollIntoView({behavior:'smooth'});return false;" id="nav-about">À propos</a></li>
+    <li><a href="#" onclick="document.getElementById('info-sec').scrollIntoView({behavior:'smooth'});return false;" id="nav-info">Infos</a></li>
+  </ul>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <div class="lang-toggle">
+      <button type="button" class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button type="button" class="lang-btn inactive" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button type="button" class="nav-order" id="nav-ord" onclick="openLink('https://www.takeaway.com/be/menu/snack-la-cage')">Commander</button>
+  </div>
+</nav>
+
+<div style="background:var(--yellow);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge" id="h-badge">Schaerbeek, Bruxelles · Depuis 1998</div>
+      <h1 id="h-title">SNACK<br><span class="red">LA CAGE</span><br>FOOD</h1>
+      <p class="hero-sub" id="h-sub">Viande fraîche 100% Halal. Dürüms, burgers, kapsalons — le meilleur de Schaerbeek depuis 1998.</p>
+      <div class="hero-btns">
+        <button type="button" class="btn-red" id="h-btn1" onclick="openLink('https://www.takeaway.com/be/menu/snack-la-cage')">Commander en ligne</button>
+        <button type="button" class="btn-black" id="h-btn2" onclick="document.getElementById('menu-sec').scrollIntoView({behavior:'smooth'})">Voir le menu</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://static.takeaway.com/images/restaurants/be/NN3015Q/logo_465x320.png" class="hero-logo-big" alt="La Cage logo">
+    </div>
+  </div>
+  <div style="padding:0 2rem 2.5rem;">
+    <div class="hero-stats">
+      <div class="stat-block">
+        <div class="stat-num">4.2</div>
+        <div class="stat-label" id="s1">Note Google</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">+246</div>
+        <div class="stat-label" id="s2">Avis</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">1998</div>
+        <div class="stat-label" id="s3">Fondé</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">32'</div>
+        <div class="stat-label" id="s4">Livraison</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker">
+  <span class="ticker-inner">DÜRÜM &nbsp;·&nbsp; BURGER &nbsp;·&nbsp; KAPSALON &nbsp;·&nbsp; SANDWICH &nbsp;·&nbsp; TACOS &nbsp;·&nbsp; FRITES FRAÎCHES &nbsp;·&nbsp; 100% HALAL &nbsp;·&nbsp; VIANDE FRAÎCHE &nbsp;·&nbsp; DEPUIS 1998 &nbsp;·&nbsp; SNACK FOOD &nbsp;·&nbsp; DÜRÜM &nbsp;·&nbsp; BURGER &nbsp;·&nbsp; KAPSALON &nbsp;·&nbsp; SANDWICH &nbsp;·&nbsp; TACOS &nbsp;·&nbsp; FRITES FRAÎCHES &nbsp;·&nbsp; 100% HALAL &nbsp;·&nbsp; VIANDE FRAÎCHE &nbsp;·&nbsp; DEPUIS 1998 &nbsp;·&nbsp; SNACK FOOD &nbsp;·&nbsp;</span>
+</div>
+
+<section id="menu-sec" class="menu-section">
+  <div class="section-tag" id="m-tag">— Le Menu</div>
+  <div class="section-title bubble" id="m-title">Ce qu'on sert</div>
+  <p class="section-sub" id="m-sub">Tout préparé minute, viande fraîche. Pas de compromis.</p>
+  <div class="badges-row" id="cat-row">
+    <button type="button" class="badge active" data-cat="all" onclick="filterMenu(this,'all')" id="f-all">Tout</button>
+    <button type="button" class="badge inactive" data-cat="menus" onclick="filterMenu(this,'menus')">Menus</button>
+    <button type="button" class="badge inactive" data-cat="durum" onclick="filterMenu(this,'durum')">Dürüms</button>
+    <button type="button" class="badge inactive" data-cat="burger" onclick="filterMenu(this,'burger')">Burgers</button>
+    <button type="button" class="badge inactive" data-cat="sandwich" onclick="filterMenu(this,'sandwich')">Sandwichs</button>
+    <button type="button" class="badge inactive" data-cat="kapsalon" onclick="filterMenu(this,'kapsalon')">Kapsalons</button>
+    <button type="button" class="badge inactive" data-cat="tacos" onclick="filterMenu(this,'tacos')">Tacos</button>
+    <button type="button" class="badge inactive" data-cat="assiette" onclick="filterMenu(this,'assiette')">Assiettes</button>
+    <button type="button" class="badge inactive" data-cat="extra" onclick="filterMenu(this,'extra')">Extras</button>
+  </div>
+  <div class="menu-grid" id="menu-grid"></div>
+</section>
+
+<section id="about-sec" class="about-section">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag" id="a-tag">— Notre Histoire</div>
+      <div class="section-title bubble" id="a-title">Dans la rue depuis 1998</div>
+      <p class="section-sub" id="a-sub">La Cage c'est une institution à Schaerbeek. On sert vite, on sert bien, et on ne fait jamais de compromis sur la qualité. Viande fraîche, frites 100% belges, bonne vibe.</p>
+      <div class="about-pills">
+        <span class="about-pill">100% Halal</span>
+        <span class="about-pill" id="p2">Viande fraîche</span>
+        <span class="about-pill" id="p3">Frites belges</span>
+        <span class="about-pill" id="p4">Livraison rapide</span>
+        <span class="about-pill" id="p5">Sur place & emporter</span>
+      </div>
+    </div>
+    <div class="about-cards">
+      <div class="about-card"><div class="about-card-icon" style="font-size:22px;">★</div><div class="about-card-num">4.2</div><div class="about-card-lbl">Google</div></div>
+      <div class="about-card"><div class="about-card-icon" style="font-size:22px;">📍</div><div class="about-card-num">1998</div><div class="about-card-lbl" id="ac2">Fondé</div></div>
+      <div class="about-card"><div class="about-card-icon" style="font-size:22px;">🥩</div><div class="about-card-num">100%</div><div class="about-card-lbl" id="ac3">Frais & Halal</div></div>
+      <div class="about-card"><div class="about-card-icon" style="font-size:22px;">⚡</div><div class="about-card-num">32'</div><div class="about-card-lbl" id="ac4">Livraison</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section">
+  <div style="text-align:center;margin-bottom:2rem;">
+    <div class="section-tag" id="r-tag">— Ils nous font confiance</div>
+    <div class="section-title bubble" id="r-title">Ce qu'ils disent</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="stars">★★★★★</div><p class="review-text" id="rv1">"Super snack ! La nourriture est délicieuse, l'endroit est propre et convivial. Je recommande à 100%."</p><div class="review-author">— Client Google</div></div>
+    <div class="review-card"><div class="stars">★★★★★</div><p class="review-text" id="rv2">"Les prix sont très abordables, l'accueil est chaleureux et la nourriture est délicieuse."</p><div class="review-author">— Client Google</div></div>
+    <div class="review-card"><div class="stars">★★★★★</div><p class="review-text" id="rv3">"Top comme toujours, fidèle à la qualité et au service. Toujours aussi bon."</p><div class="review-author">— Client régulier</div></div>
+  </div>
+</section>
+
+<div id="info-sec" class="info-section">
+  <div class="info-block">
+    <div class="info-title bubble" id="i-h">Horaires</div>
+    <div class="info-row"><span class="info-day" id="i-days">Lundi — Dimanche</span></div>
+    <div class="info-row"><span class="info-day" id="i-open">Ouvert</span><span class="info-time">12:00 — 24:00</span></div>
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #eee;">
+      <div class="info-row"><span class="info-day" id="i-today">Ouvert aujourd'hui</span><span style="color:var(--red);font-weight:800;font-size:13px;">Oui ✓</span></div>
+    </div>
+  </div>
+  <div class="info-block">
+    <div class="info-title bubble" id="i-c">Contact & Adresse</div>
+    <p class="info-line">Rue Portaels 2<br>1030 Schaerbeek<br>Bruxelles, Belgique</p>
+    <p class="info-line" style="margin-top:1rem;"><a href="tel:+32485822031">+32 485 82 20 31</a><br><a href="https://www.snack-la-cage.be">snack-la-cage.be</a></p>
+  </div>
+  <div class="info-block">
+    <div class="info-title bubble" id="i-ord">Commander</div>
+    <p class="info-line" id="i-del" style="margin-bottom:1rem;">Livraison via Deliveroo & Takeaway.com</p>
+    <button type="button" class="btn-red-full" onclick="openLink('https://www.takeaway.com/be/menu/snack-la-cage')">Takeaway.com</button>
+    <button type="button" class="btn-yellow-full" onclick="openLink('https://deliveroo.be/en/menu/brussels/schaerbeek/snack-la-cage')">Deliveroo</button>
+  </div>
+</div>
+
+<div class="order-banner">
+  <div>
+    <div class="ob-h2 bubble" id="ob-h">T'as faim ? On est là.</div>
+    <p class="ob-sub" id="ob-s">Commande en ligne ou passe au Rue Portaels 2, Schaerbeek</p>
+  </div>
+  <div class="ob-btns">
+    <button type="button" class="btn-white" id="ob-b1" onclick="openLink('https://www.takeaway.com/be/menu/snack-la-cage')">Commander maintenant</button>
+    <button type="button" class="btn-ghost" id="ob-b2" onclick="openLink('https://maps.google.com/?q=Rue+Portaels+2+Schaerbeek+Brussels')">Itinéraire</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="https://static.takeaway.com/images/restaurants/be/NN3015Q/logo_465x320.png" alt="La Cage">
+  </div>
+  <div class="footer-copy" id="fc">© 2024 Snack La Cage · Schaerbeek, Bruxelles</div>
+  <div class="footer-halal">100% Halal</div>
+</footer>
+
+<script>
+const menuItems=[
+  {cat:'menus',name:'Menu Burger Kefta',desc:'Burger kefta, frites & boisson',price:'9,00€',hot:true},
+  {cat:'menus',name:'Menu Burger Hamburger',desc:'Burger, frites & boisson',price:'8,50€'},
+  {cat:'menus',name:'Menu Burger Fish',desc:'Burger poisson, frites & boisson',price:'8,50€'},
+  {cat:'menus',name:'Menu Enfant',desc:'Burger ou nuggets, frites, Capri-Sun',price:'7,50€'},
+  {cat:'durum',name:'Dürüm Poulet',desc:'Avec frites',price:'7,00€'},
+  {cat:'durum',name:'Dürüm Viande',desc:'Avec frites',price:'7,50€'},
+  {cat:'durum',name:'Dürüm Mixte',desc:'Avec frites',price:'8,00€'},
+  {cat:'durum',name:'Dürüm Kefta',desc:'Avec frites',price:'7,50€'},
+  {cat:'durum',name:'Dürüm Crevettes',desc:'Avec frites',price:'8,00€'},
+  {cat:'durum',name:'Dürüm Bazouka',desc:'Géant — avec frites',price:'11,00€',hot:true},
+  {cat:'durum',name:'Dürüm Regamonté',desc:'Mixte poisson, avec frites',price:'9,00€'},
+  {cat:'burger',name:'Burger Kefta',desc:'Solo',price:'5,00€'},
+  {cat:'burger',name:'Burger Fish',desc:'Solo',price:'5,00€'},
+  {cat:'burger',name:'Hamburger',desc:'Solo',price:'4,00€'},
+  {cat:'sandwich',name:'Sandwich Viande',desc:'Avec frites',price:'7,50€'},
+  {cat:'sandwich',name:'Sandwich Poulet',desc:'Avec frites',price:'7,00€'},
+  {cat:'sandwich',name:'Sandwich Mixte',desc:'Choix de 2 viandes, avec frites',price:'8,00€'},
+  {cat:'sandwich',name:'Sandwich Bazouka',desc:'Géant',price:'11,00€',hot:true},
+  {cat:'sandwich',name:'Sandwich Kefta',desc:'Avec frites',price:'7,00€'},
+  {cat:'kapsalon',name:'Kapsalon Viande',desc:'',price:'8,50€'},
+  {cat:'kapsalon',name:'Kapsalon Poulet',desc:'',price:'8,50€'},
+  {cat:'kapsalon',name:'Kapsalon Mixte',desc:'',price:'9,50€'},
+  {cat:'kapsalon',name:'Kapsalon Hamburger',desc:'',price:'7,50€'},
+  {cat:'tacos',name:'Tacos Simple',desc:'',price:'8,00€'},
+  {cat:'tacos',name:'Tacos Double',desc:'Taille XL',price:'11,00€',hot:true},
+  {cat:'assiette',name:'Assiette Viande',desc:'',price:'15,00€'},
+  {cat:'assiette',name:'Assiette Poulet',desc:'',price:'14,00€'},
+  {cat:'assiette',name:'Assiette Mixte',desc:'',price:'16,00€'},
+  {cat:'assiette',name:'Assiette Kefta',desc:'',price:'14,00€'},
+  {cat:'extra',name:'Frites Moyennes',desc:'100% belges',price:'3,50€'},
+  {cat:'extra',name:'Frites Oignons Secs',desc:'',price:'5,50€'},
+  {cat:'extra',name:'Ailes de Poulet',desc:'',price:'4,50€'},
+  {cat:'extra',name:'Salade Poulet',desc:'',price:'6,00€'},
+  {cat:'extra',name:'Tiramisu',desc:'Dessert',price:'4,50€'},
+];
+const catL={menus:'Menu',durum:'Dürüm',burger:'Burger',sandwich:'Sandwich',kapsalon:'Kapsalon',tacos:'Tacos',assiette:'Assiette',extra:'Extra'};
+function renderMenu(cat){
+  const g=document.getElementById('menu-grid');
+  const list=cat==='all'?menuItems:menuItems.filter(i=>i.cat===cat);
+  g.innerHTML=list.map(i=>`<div class="menu-card">${i.hot?'<div class="pop-badge">Populaire</div>':''}<div class="menu-card-cat">${catL[i.cat]}</div><div class="menu-card-name">${i.name}</div>${i.desc?`<div class="menu-card-desc">${i.desc}</div>`:'<div style="height:8px"></div>'}<div class="menu-card-price">${i.price}</div></div>`).join('');
+}
+function filterMenu(el,cat){
+  document.querySelectorAll('.badge').forEach(b=>{b.className='badge inactive';});
+  el.className='badge active';
+  renderMenu(cat);
+}
+renderMenu('all');
+
+const T={
+  fr:{
+    'h-badge':'Schaerbeek, Bruxelles · Depuis 1998',
+    'h-title-html':'SNACK<br><span class="red">LA CAGE</span><br>FOOD',
+    'h-sub':'Viande fraîche 100% Halal. Dürüms, burgers, kapsalons — le meilleur de Schaerbeek depuis 1998.',
+    'h-btn1':'Commander en ligne','h-btn2':'Voir le menu',
+    's1':'Note Google','s2':'Avis','s3':'Fondé','s4':'Livraison',
+    'm-tag':'— Le Menu','m-title':'Ce qu\'on sert','m-sub':'Tout préparé minute, viande fraîche. Pas de compromis.',
+    'f-all':'Tout',
+    'a-tag':'— Notre Histoire','a-title':'Dans la rue depuis 1998',
+    'a-sub':'La Cage c\'est une institution à Schaerbeek. On sert vite, on sert bien, et jamais de compromis sur la qualité.',
+    'p2':'Viande fraîche','p3':'Frites belges','p4':'Livraison rapide','p5':'Sur place & emporter',
+    'ac2':'Fondé','ac3':'Frais & Halal','ac4':'Livraison',
+    'r-tag':'— Ils nous font confiance','r-title':'Ce qu\'ils disent',
+    'rv1':'"Super snack ! La nourriture est délicieuse, l\'endroit est propre et convivial. Je recommande à 100%."',
+    'rv2':'"Les prix sont très abordables, l\'accueil est chaleureux et la nourriture est délicieuse."',
+    'rv3':'"Top comme toujours, fidèle à la qualité et au service. Toujours aussi bon."',
+    'i-h':'Horaires','i-days':'Lundi — Dimanche','i-open':'Ouvert','i-today':'Ouvert aujourd\'hui',
+    'i-c':'Contact & Adresse','i-ord':'Commander','i-del':'Livraison via Deliveroo & Takeaway.com',
+    'ob-h':'T\'as faim ? On est là.','ob-s':'Commande en ligne ou passe au Rue Portaels 2, Schaerbeek',
+    'ob-b1':'Commander maintenant','ob-b2':'Itinéraire',
+    'fc':'© 2024 Snack La Cage · Schaerbeek, Bruxelles',
+    'nav-ord':'Commander','nav-about':'À propos','nav-info':'Infos'
+  },
+  en:{
+    'h-badge':'Schaerbeek, Brussels · Since 1998',
+    'h-title-html':'SNACK<br><span class="red">LA CAGE</span><br>FOOD',
+    'h-sub':'100% Halal fresh meat. Dürüms, burgers, kapsalons — Schaerbeek\'s best since 1998.',
+    'h-btn1':'Order online','h-btn2':'See the menu',
+    's1':'Google Rating','s2':'Reviews','s3':'Founded','s4':'Delivery',
+    'm-tag':'— The Menu','m-title':'What we serve','m-sub':'Everything freshly made with quality meat. No shortcuts.',
+    'f-all':'All',
+    'a-tag':'— Our Story','a-title':'On the streets since 1998',
+    'a-sub':'La Cage is a landmark in Schaerbeek. Fast service, great food, no compromise on quality. That\'s the deal.',
+    'p2':'Fresh meat','p3':'Belgian fries','p4':'Fast delivery','p5':'Eat in & takeaway',
+    'ac2':'Founded','ac3':'Fresh & Halal','ac4':'Delivery',
+    'r-tag':'— What people say','r-title':'The reviews',
+    'rv1':'"Amazing snack! The food is delicious, clean and friendly place. 100% recommended."',
+    'rv2':'"Very affordable prices, warm welcome, and the food is absolutely delicious."',
+    'rv3':'"Top as always, consistent quality and service. Always this good."',
+    'i-h':'Opening Hours','i-days':'Monday — Sunday','i-open':'Open','i-today':'Open today',
+    'i-c':'Contact & Address','i-ord':'Order Now','i-del':'Delivery via Deliveroo & Takeaway.com',
+    'ob-h':'Hungry? We got you.','ob-s':'Order online or come to Rue Portaels 2, Schaerbeek',
+    'ob-b1':'Order now','ob-b2':'Get directions',
+    'fc':'© 2024 Snack La Cage · Schaerbeek, Brussels',
+    'nav-ord':'Order','nav-about':'About','nav-info':'Info'
+  }
+};
+function setLang(l){
+  document.getElementById('btn-fr').className='lang-btn '+(l==='fr'?'active':'inactive');
+  document.getElementById('btn-en').className='lang-btn '+(l==='en'?'active':'inactive');
+  const t=T[l];
+  for(const[id,val] of Object.entries(t)){
+    if(id==='h-title-html'){document.getElementById('h-title').innerHTML=val;continue;}
+    if(id==='nav-ord'){document.getElementById('nav-ord').textContent=val;continue;}
+    const el=document.getElementById(id);
+    if(el)el.textContent=val;
+  }
+}
+
+function openLink(url){
+  window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
